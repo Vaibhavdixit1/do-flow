@@ -6,7 +6,7 @@ A modern, responsive task management application built with Next.js, MongoDB Atl
 
 - ✅ **Modern UI** with glassmorphism effects and dark/light mode
 - ✅ **Mobile Responsive** design that works on all devices
-- ✅ **MongoDB Atlas Integration** for persistent data storage
+- ✅ **MongoDB Atlas Integration** for persistent data storageclo
 - ✅ **Real-time Updates** with API integration
 - ✅ **Professional Design** with shadcn/ui components
 - ✅ **Task Management** - Add, complete, and delete tasks
@@ -26,7 +26,7 @@ A modern, responsive task management application built with Next.js, MongoDB Atl
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone <https://github.com/Vaibhavdixit1/do-flow>
 cd doflow
 ```
 
@@ -90,28 +90,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 - `POST /api/tasks` - Create a new task
 - `PUT /api/tasks/[id]` - Update a task
 - `DELETE /api/tasks/[id]` - Delete a task
-
-src/
-├── app/
-│   ├── api/
-│   │   └── tasks/
-│   │       ├── route.js          # GET, POST /api/tasks
-│   │       └── [id]/
-│   │           └── route.js      # PUT, DELETE /api/tasks/[id]
-│   ├── components/
-│   │   ├── Dashboard.jsx         # Main dashboard component
-│   │   ├── Analytics.jsx         # Analytics page
-│   │   └── Settings.jsx          # Settings page
-│   ├── globals.css               # Global styles
-│   ├── layout.js                 # Root layout
-│   └── page.js                   # Main page
-├── components/
-│   └── ui/                       # shadcn/ui components
-├── lib/
-│   └── mongodb.js                # MongoDB connection
-└── models/
-    └── Task.js                   # Task model
-```
 
 ## Features in Detail
 
