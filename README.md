@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DoFlow - Task Management App
 
-## Getting Started
+A modern, responsive task management application built with Next.js, MongoDB Atlas, and shadcn/ui components.
 
-First, run the development server:
+## Features
+
+- ✅ **Modern UI** with glassmorphism effects and dark/light mode
+- ✅ **Mobile Responsive** design that works on all devices
+- ✅ **MongoDB Atlas Integration** for persistent data storage
+- ✅ **Real-time Updates** with API integration
+- ✅ **Professional Design** with shadcn/ui components
+- ✅ **Task Management** - Add, complete, and delete tasks
+- ✅ **Progress Tracking** with completion statistics
+- ✅ **Error Handling** with user-friendly error messages
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB Atlas
+- **UI Components**: shadcn/ui
+- **Icons**: React Icons (Feather Icons)
+- **Styling**: Tailwind CSS with custom gradients
+
+## Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd doflow
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Set Up MongoDB Atlas
+
+1. **Create MongoDB Atlas Account**
+   - Go to [MongoDB Atlas](https://cloud.mongodb.com/)
+   - Sign up or log in to your account
+
+2. **Create a New Cluster**
+   - Click "Build a Database"
+   - Choose "FREE" tier (M0)
+   - Select your preferred cloud provider and region
+   - Click "Create"
+
+3. **Set Up Database Access**
+   - Go to "Database Access" in the left sidebar
+   - Click "Add New Database User"
+   - Create a username and password (save these!)
+   - Select "Read and write to any database"
+   - Click "Add User"
+
+4. **Set Up Network Access**
+   - Go to "Network Access" in the left sidebar
+   - Click "Add IP Address"
+   - Click "Allow Access from Anywhere" (for development)
+   - Click "Confirm"
+
+5. **Get Your Connection String**
+   - Go to "Database" in the left sidebar
+   - Click "Connect"
+   - Choose "Drivers"
+   - Copy the connection string
+
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/doflow?retryWrites=true&w=majority
+```
+
+Replace the connection string with your actual MongoDB Atlas connection string.
+
+### 5. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## API Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `GET /api/tasks` - Get all tasks
+- `POST /api/tasks` - Create a new task
+- `PUT /api/tasks/[id]` - Update a task
+- `DELETE /api/tasks/[id]` - Delete a task
 
-## Learn More
+src/
+├── app/
+│   ├── api/
+│   │   └── tasks/
+│   │       ├── route.js          # GET, POST /api/tasks
+│   │       └── [id]/
+│   │           └── route.js      # PUT, DELETE /api/tasks/[id]
+│   ├── components/
+│   │   ├── Dashboard.jsx         # Main dashboard component
+│   │   ├── Analytics.jsx         # Analytics page
+│   │   └── Settings.jsx          # Settings page
+│   ├── globals.css               # Global styles
+│   ├── layout.js                 # Root layout
+│   └── page.js                   # Main page
+├── components/
+│   └── ui/                       # shadcn/ui components
+├── lib/
+│   └── mongodb.js                # MongoDB connection
+└── models/
+    └── Task.js                   # Task model
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Features in Detail
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Task Management
+- Add new tasks with a clean input interface
+- Mark tasks as complete/incomplete
+- Delete tasks with confirmation
+- Real-time updates across all operations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Statistics Dashboard
+- Total tasks count
+- Pending tasks count
+- Completion percentage
+- Visual progress indicators
 
-## Deploy on Vercel
+### User Experience
+- Dark/light mode toggle with shadcn Switch
+- Responsive design for all screen sizes
+- Loading states and error handling
+- Smooth animations and transitions
+- Professional glassmorphism design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Database Features
+- Persistent data storage in MongoDB Atlas
+- Optimistic UI updates
+- Error handling and validation
+- Automatic timestamps for tasks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The application is ready for deployment on platforms like:
+- Vercel (recommended for Next.js)
+- Netlify
+- Railway
+- Any platform supporting Node.js
+
+Make sure to set the `MONGODB_URI` environment variable in your deployment platform.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).

@@ -1,77 +1,77 @@
-"use client";
-import { useState } from "react";
+"use client"
 
-export default function Home() {
-  const [tasks, setTasks] = useState([]);
-  const [title, setTitle] = useState("");
+import { useState, useEffect } from 'react';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import { Switch } from '@/components/ui/switch';
+import Home from '@/components/Home';
 
-  const addTask = () => {
-    if (!title.trim()) return;
-    const newTask = {
-      id: Date.now(),
-      title,
-      completed: false,
-    };
-    setTasks([newTask, ...tasks]);
-    setTitle("");
-  };
+export default function Main() {
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const toggleComplete = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
+  // Load dark mode preference from localStorage
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode !== null) {
+      setIsDarkMode(JSON.parse(savedDarkMode));
+    }
+  }, []);
 
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  // Save dark mode preference to localStorage
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">DoFlow – Task Manager</h1>
+    <div className={`min-h-screen transition-all duration-300 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white' 
+        : 'bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900'
+    }`}>
+      {/* Top Navigation Bar */}
+      <nav className={`sticky top-0 z-50 backdrop-blur-md border-b ${
+        isDarkMode 
+          ? 'bg-gray-900/80 border-gray-700' 
+          : 'bg-white/80 border-gray-200'
+      }`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center`}>
+                <span className="text-white font-bold text-sm sm:text-lg">D</span>
+              </div>
+              <h1 className={`text-xl sm:text-2xl font-bold ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>
+                DoFlow
+              </h1>
+            </div>
+            
+            <div className="flex items-center gap-2 sm:gap-3">
+              <FiSun className={`w-4 h-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} />
+              <Switch
+                checked={isDarkMode}
+                onCheckedChange={toggleDarkMode}
+                className="data-[state=checked]:bg-blue-600"
+              />
+              <FiMoon className={`w-4 h-4 ${isDarkMode ? 'text-yellow-400' : 'text-gray-600'}`} />
+            </div>
+          </div>
+        </div>
+      </nav>
 
-      {/* Add Task */}
-      <div className="flex gap-2 mb-6">
-        <input
-          className="flex-grow border px-3 py-2 rounded"
-          placeholder="Enter a task"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button
-          onClick={addTask}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Add
-        </button>
-      </div>
-
-      {/* Task List */}
-      <ul className="space-y-2">
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            className="flex justify-between items-center bg-white p-3 rounded shadow"
-          >
-            <span
-              onClick={() => toggleComplete(task.id)}
-              className={`cursor-pointer ${
-                task.completed ? "line-through text-red-500" : "text-black"
-              }`}
-            >
-              {task.title}
-            </span>
-            <button
-              onClick={() => deleteTask(task.id)}
-              className="text-red-500 hover:text-red-700"
-            >
-              ✕
-            </button>
-          </li>
-        ))}
-      </ul>
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        <Home isDarkMode={isDarkMode} />
+      </main>
     </div>
   );
 }
